@@ -1,0 +1,89 @@
+ // 10/19/2026
+ 
+ Float is for temperature and particulate measurements. 
+
+if statements closed with : "also else and elif"
+
+//10/20/2026
+
+I did not know that in python to define a function it uses def 
+EX: 
+def greet ():
+    print("Monitoring System Started")
+
+    greet()
+
+10/21/2026
+worked on the return could be useful in the if statements when colleteing data 
+
+Processing Multiple Sensor{
+
+    array 
+    EX: sensor_readings = [26.7,35.8,27.2]
+
+    A for loop Processing each item in the list:
+    EX:
+        for temperature in sensor_readings:
+            status = check_temperature(temperature, temperature_threshold)
+            print(temperature, status)
+            // have the if statements after this 
+
+    the loop takes each reading and passes it to the function, receives the status then display the results
+    One function plus a loop can proecss many readings.
+}
+
+Organizing Sensor Data with Dictionaries
+    Each Dictionary stores related field as key-value pairs
+
+    EX:
+        for reading in sensor_readings:
+            temperature = reading["temperature"]
+            sensor_id = reading["sensor_id"]
+
+            status = check_temperature(temperature, temperature_threshold)
+            print(sensor_id, temperature, status)
+
+Timestamps and logging 
+
+    python has a library modules called datetime and logging
+
+    EX:
+        from datetime import datetime
+
+        Timestamps =datetime.now().isoformat(Timespec="seconds")
+
+    A Timestamp help establish when a reading was processed. the example uses local system time, so it is not guaranteed to be synchronized or accurate.
+
+    Logging 
+
+    EX:
+        import logging
+
+        logging.basicConfig(
+            filename="could be named any file",
+            level=logging.INFO,
+            format="%(asctime)s - %(levelname)s - %(message)s"
+        )
+    This configures Python's logging system.
+
+    filename: sends log records to "could be named any file".
+
+    level=logging.INFO: allows informational messages and more severe messages, such as warnings.
+
+    format: specifies the timestamp, severity level, and message layout.
+
+    The program can then record events:
+
+        if status == "WARNING":
+            logging.warning(
+                f"Sensor {sensor_id}: temperature={temperature}"
+            )
+        else:
+            logging.info(
+                f"Sensor {sensor_id}: temperature={temperature}"
+            )
+
+    The f before the string allows variable values to be inserted into the message.
+
+MATH librarys
+    Math.isFinite //it will help with inputs like this {"sensor_id": "TEMP-07", "temperature": float("nan")}
